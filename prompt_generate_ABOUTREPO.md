@@ -1,33 +1,93 @@
 # Generate ABOUTREPO.md
 
-Analyze the entire repository and generate a comprehensive `ABOUTREPO.md`.
+Your task is to create a comprehensive `ABOUTREPO.md` that serves as the long-term repository memory layer for future AI agents and engineers.
 
-The document is NOT a README, changelog, roadmap, marketing document, or developer guide.
+This document must allow future sessions to quickly understand the repository without re-discovering architecture, code flow, design decisions, module relationships, or project structure.
 
-Its purpose is to serve as the repository memory layer for future AI agents and engineers.
+The goal is NOT to create a README.
 
-A new session should be able to read ONLY:
+The goal is NOT to create a changelog.
+
+The goal is NOT to create marketing documentation.
+
+The goal is to create an accurate repository audit and implementation snapshot.
+
+---
+
+# Primary Objective
+
+A future AI session should be able to read only:
 
 * graphify-out/GRAPH_REPORT.md
 * ABOUTREPO.md
 
-and quickly understand how the repository works without re-discovering the architecture.
+and rapidly understand:
+
+* what the project does
+* how it works
+* how components interact
+* where functionality lives
+* how data flows
+* how to safely modify it
+
+without needing to re-audit the repository from scratch.
 
 ---
 
-## Requirements
+# Repository Discovery Requirements
 
-Produce a repository snapshot describing the CURRENT state of the codebase.
+Before writing ABOUTREPO.md:
 
-Focus on facts, implementation details, architecture, data flow, invariants, and extension points.
+1. Recursively inspect the entire repository.
+2. Traverse all source directories.
+3. Analyze all major modules and packages.
+4. Analyze configuration files.
+5. Analyze build files.
+6. Analyze deployment files.
+7. Analyze infrastructure definitions.
+8. Analyze CI/CD files.
+9. Analyze scripts and tooling.
+10. Analyze test suites.
+11. Analyze entry points.
+12. Analyze dependency definitions.
+13. Analyze generated graphify output.
+14. Trace execution flows through actual code.
+15. Infer architecture primarily from implementation, not documentation.
 
-Do not write aspirational content.
+Do NOT generate ABOUTREPO.md after inspecting only a subset of files.
 
-Do not describe planned features.
+Repository reality takes precedence over README files and comments.
 
-Do not invent architecture that does not exist.
+If implementation conflicts with documentation:
 
-If something cannot be determined from the code, explicitly state that.
+* trust implementation
+* document the discrepancy
+
+---
+
+# Documentation Philosophy
+
+Document:
+
+* what exists
+* what is implemented
+* what is observable
+* what is enforced
+
+Do NOT document:
+
+* aspirations
+* future plans
+* speculative architecture
+* unimplemented ideas
+
+If something cannot be confidently determined:
+
+* explicitly state that
+
+Never invent architecture.
+
+Never assume patterns that are not visible in code.
 
 ---
 
@@ -35,20 +95,24 @@ If something cannot be determined from the code, explicitly state that.
 
 ## 1. What
 
-* What the project does
-* Primary purpose
-* Intended users
-* Scope
-* Out-of-scope items
+Describe:
+
+* project purpose
+* primary capabilities
+* intended users
+* scope
+* out-of-scope responsibilities
 
 ---
 
 ## 2. Why
 
-* Problem being solved
-* Design goals
-* Key differentiators
-* Major tradeoffs
+Describe:
+
+* problem being solved
+* design goals
+* key differentiators
+* major architectural tradeoffs
 
 ---
 
@@ -56,42 +120,59 @@ If something cannot be determined from the code, explicitly state that.
 
 Describe:
 
-* High-level architecture
-* Core subsystems
-* Boundaries
-* Responsibilities
-* Ports/adapters/layers (if applicable)
+* high-level architecture
+* architectural style
+* layers
+* services
+* subsystems
+* boundaries
+* responsibilities
 
-Include diagrams using ASCII when useful.
+Include ASCII diagrams where useful.
+
+Example:
+
+```text
+CLI
+  ↓
+Orchestrator
+  ↓
+Processors
+  ↓
+Storage
+  ↓
+Outputs
+```
+
+Focus on actual implementation.
 
 ---
 
 ## 4. Module Relationships
 
-Map major modules and dependencies.
-
 For each major module:
 
-* Responsibility
-* Inputs
-* Outputs
-* Dependencies
-* Consumers
+* responsibility
+* inputs
+* outputs
+* dependencies
+* consumers
 
 Show how modules interact.
+
+Include dependency diagrams when useful.
 
 ---
 
 ## 5. Code Layout
 
-Document the repository structure.
+Document repository structure.
 
-For important files/directories:
+For important directories and files:
 
-* Purpose
-* Responsibilities
-* Special behavior
-* Ownership within architecture
+* purpose
+* responsibilities
+* notable implementation details
 
 Example:
 
@@ -103,23 +184,34 @@ src/
 └── ...
 ```
 
-Include explanations.
+Explain why each exists.
 
 ---
 
 ## 6. Execution Flow
 
-Describe the primary runtime paths.
+Document runtime behavior.
 
 Examples:
 
+* startup flow
 * CLI flow
-* Request lifecycle
-* Background jobs
-* Processing pipeline
-* Startup sequence
+* request lifecycle
+* background jobs
+* processing pipelines
+* event handling
 
-Use step-by-step flow diagrams where useful.
+Use step-by-step execution traces.
+
+Example:
+
+```text
+main()
+ → config load
+ → dependency initialization
+ → processing
+ → output generation
+```
 
 ---
 
@@ -127,14 +219,14 @@ Use step-by-step flow diagrams where useful.
 
 Document:
 
-* Core entities
-* Data structures
+* entities
+* models
 * DTOs
-* Models
-* Database schema
-* Relationships
+* schemas
+* database structures
+* contracts
 
-Explain which objects move through the system.
+Describe how data moves through the system.
 
 ---
 
@@ -142,15 +234,18 @@ Explain which objects move through the system.
 
 Document:
 
-* Languages
-* Frameworks
-* Databases
-* Build tools
-* Packaging
-* Infrastructure
-* External services
+* languages
+* frameworks
+* libraries
+* databases
+* build systems
+* packaging systems
+* infrastructure
 
-Separate mandatory vs optional dependencies.
+Separate:
+
+* required dependencies
+* optional dependencies
 
 ---
 
@@ -158,42 +253,45 @@ Separate mandatory vs optional dependencies.
 
 Document:
 
-* Config files
-* Environment variables
-* Runtime flags
-* Secrets handling
-* Configuration precedence rules
-* Validation behavior
+* config files
+* environment variables
+* runtime flags
+* secrets management
+* configuration precedence
+* validation rules
+
+Include configuration invariants.
 
 ---
 
 ## 10. Functionality Inventory
 
-List all major capabilities.
+Create a complete feature inventory.
 
 For each capability:
 
-* What it does
-* Entry point
-* Main modules involved
-* Outputs produced
+* name
+* purpose
+* entry point
+* major modules involved
+* outputs
 
-This section should act as a feature catalog.
+This should serve as a functionality catalog.
 
 ---
 
 ## 11. Conventions
 
-Document project conventions:
+Document repository-specific conventions:
 
-* Naming
-* Patterns
-* Architectural rules
-* Coding standards enforced by the repository
-* Plugin mechanisms
-* Dependency rules
+* naming conventions
+* code organization patterns
+* dependency rules
+* plugin mechanisms
+* extension patterns
+* architectural rules
 
-Include any repository-specific practices.
+Include conventions that contributors must follow.
 
 ---
 
@@ -201,12 +299,12 @@ Include any repository-specific practices.
 
 Document:
 
-* Build process
-* Packaging
-* Runtime environments
-* Deployment targets
+* build process
+* packaging process
+* deployment targets
+* runtime environments
 * CI/CD
-* Operational assumptions
+* operational assumptions
 
 ---
 
@@ -214,12 +312,13 @@ Document:
 
 Document generated artifacts:
 
-* Reports
-* Files
+* reports
+* files
+* databases
 * APIs
-* Databases
-* Logs
-* Side effects
+* logs
+* manifests
+* side effects
 
 Include formats and locations.
 
@@ -229,11 +328,11 @@ Include formats and locations.
 
 Document how to add:
 
-* New modules
-* New integrations
-* New plugins
-* New features
-* New workflows
+* new modules
+* new plugins
+* new integrations
+* new features
+* new workflows
 
 Focus on existing extension mechanisms.
 
@@ -245,46 +344,146 @@ List rules that must never be broken.
 
 Examples:
 
-* Schema guarantees
-* Security guarantees
-* Architectural guarantees
-* Data consistency guarantees
+* schema guarantees
+* security guarantees
+* architectural guarantees
+* privacy guarantees
+* compatibility guarantees
 
-These should be concise and actionable.
+Keep these concise and actionable.
 
 ---
 
 ## 16. Known Tradeoffs
 
-Document intentional compromises:
+Document intentional tradeoffs:
 
-* Performance vs simplicity
-* Flexibility vs safety
-* Static vs dynamic approaches
-* Architectural decisions
+* simplicity vs flexibility
+* performance vs maintainability
+* static vs dynamic behavior
+* security vs usability
+
+Only document tradeoffs visible in implementation.
 
 ---
 
 ## 17. Graphify Summary
 
-Summarize insights from graphify:
+Summarize important findings from:
 
-* Major communities
-* Highly connected nodes
-* Central abstractions
-* Architectural hotspots
+graphify-out/GRAPH_REPORT.md
+
+Include:
+
+* major communities
+* central abstractions
+* highly connected nodes
+* architectural hotspots
 
 Do not duplicate the full graph report.
 
 ---
 
-# Output Rules
+## 18. Operational Notes
 
-* Prefer concrete implementation details over general descriptions.
-* Prefer architecture over marketing.
-* Prefer actual code behavior over documentation claims.
-* Use ASCII diagrams where useful.
-* Include file names, classes, functions, modules, and execution paths.
-* Capture repository reality, not intent.
-* Write as a living repository snapshot.
-* Future updates should modify sections surgically rather than rewriting the document.
+Document:
+
+* common maintenance tasks
+* expected workflows
+* debugging entry points
+* operational assumptions
+
+Include only information observable from the repository.
+
+---
+
+## 19. Coverage Report
+
+At the end of the document include:
+
+### Repository Coverage
+
+Directories analyzed:
+
+* ...
+
+Major modules analyzed:
+
+* ...
+
+Configuration files analyzed:
+
+* ...
+
+Build/deployment files analyzed:
+
+* ...
+
+Tests analyzed:
+
+* ...
+
+Files intentionally skipped:
+
+* ...
+
+Documentation sources used:
+
+* ...
+
+### Confidence Assessment
+
+For each major section provide:
+
+* High confidence
+* Medium confidence
+* Low confidence
+
+If a section contains inferred information, explicitly identify it.
+
+---
+
+# Output Quality Requirements
+
+The generated ABOUTREPO.md must:
+
+* be based on actual repository contents
+* be based on recursive repository analysis
+* be implementation-focused
+* be architecture-focused
+* be useful to future AI sessions
+* be useful to future engineers
+* contain concrete details
+* contain file names
+* contain module names
+* contain execution flows
+* contain dependency relationships
+* contain extension guidance
+* contain operational knowledge
+
+Prefer:
+
+implementation > documentation
+
+code > comments
+
+observed behavior > assumptions
+
+repository reality > stated intent
+
+---
+
+# Success Criteria
+
+A new AI session should be able to read ABOUTREPO.md and answer:
+
+* What does this project do?
+* How is it structured?
+* Where does functionality live?
+* How does data flow?
+* How do I add a feature?
+* What must never be broken?
+* What files should I modify?
+* What architecture exists today?
+
+without needing to re-audit the entire repository.
