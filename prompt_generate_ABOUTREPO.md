@@ -1,3 +1,7 @@
+#Essentials 
+1. Run `/graphify update` 
+2. Always read `graphify-out/GRAPH_REPORT.md` before any search, analysis, planning, or file access.
+
 # Generate ABOUTREPO.md
 
 Your task is to create a comprehensive `ABOUTREPO.md` that serves as the long-term repository memory layer for future AI agents and engineers.
